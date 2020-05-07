@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<audio controls autoplay id="player"></audio>
+</body>
+<script>
+    var ws = new WebSocket("ws://192.168.1.101:9528/app/receiver");
+    ws.onmessage = function (data) {
+        var data_json = JSON.parse(data.data);
+        console.log(data_json.chat);
+        document.getElementById("player").src = "http://192.168.1.101:9527/get_chat/"+data_json.chat;
+
+    }
+</script>
+</html>
